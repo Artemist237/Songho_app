@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Songho</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== PAGE ACCUEIL ========== -->
+  <div id="page-accueil">
+    <div class="accueil-wrap">
+      <header class="hero">
+        <div class="hero-icon">♟</div>
+        <h1 class="hero-title">SONGHO</h1>
+        <p class="hero-sub">Jeu de stratégie traditionnel africain</p>
+        <div class="hero-divider"></div>
+        <p class="hero-desc">Capturez 40 graines avant votre adversaire.<br>Maîtrisez la semaille, les prises et la chaîne.</p>
+      </header>
+
+      <section class="register-section">
+        <h2 class="register-title">Enregistrement des joueurs</h2>
+        <div class="players-form">
+          <div class="player-input-block">
+            <label class="input-label" for="nom-nord">Joueur Nord</label>
+            <input type="text" id="nom-nord" class="player-input" placeholder="Entrez votre nom..." maxlength="20">
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="player-input-block">
+            <label class="input-label" for="nom-sud">Joueur Sud</label>
+            <input type="text" id="nom-sud" class="player-input" placeholder="Entrez votre nom..." maxlength="20">
+          </div>
+        </div>
+        <p id="form-error" class="form-error"></p>
+        <button class="btn-jouer" onclick="lancerPartie()">Lancer la partie</button>
+        <button class="btn-regles" onclick="voirRegles()">Voir les règles</button>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <p class="footer-name">Développé par <strong>Evina Zanga Alan Dimitri</strong></p>
+      <p class="footer-info">AfriTech Innovation &nbsp;·&nbsp; Licence 2 Informatique &nbsp;·&nbsp; 24G2003</p>
+    </footer>
+  </div>
+
+  <!-- ========== PAGE RÈGLES ========== -->
+  <div id="page-regles" class="hidden">
+    <div class="regles-wrap">
+      <div class="regles-header">
+        <button class="btn-back" onclick="retourAccueilDepuisRegles()">← Accueil</button>
+        <h2 class="regles-title">Règles du jeu</h2>
+        <div style="width:80px"></div>
+      </div>
+
+      <div class="regle-bloc">
+        <div class="regle-num">01</div>
+        <div class="regle-content">
+          <h3 class="regle-h">But du jeu</h3>
+          <p class="regle-p">Le Songho se joue à 2 joueurs : Nord et Sud. Le joueur qui atteint <strong>au moins 40 graines capturées</strong> gagne la partie.</p>
+        </div>
+      </div>
+
+      <div class="regle-bloc">
+        <div class="regle-num">02</div>
+        <div class="regle-content">
+          <h3 class="regle-h">Tablier</h3>
+          <p class="regle-p">Chaque joueur possède <strong>7 cases</strong>. Au départ, chaque case contient <strong>5 graines</strong> (70 graines au total).</p>
+        </div>
+      </div>
+
+      <div class="regle-bloc">
+        <div class="regle-num">03</div>
+        <div class="regle-content">
+          <h3 class="regle-h">Tour de jeu</h3>
+          <p class="regle-p">À son tour, un joueur choisit une case non vide de son camp. Il prend toutes les graines et les sème <strong>une par une</strong> dans les cases suivantes dans le sens du circuit.</p>
+        </div>
+      </div>
+
+      <div class="regle-bloc">
+        <div class="regle-num">04</div>
+        <div class="regle-content">
+          <h3 class="regle-h">Conditions de prise</h3>
+          <p class="regle-p">Une prise est possible si :</p>
+          <ul class="regle-list">
+            <li>La dernière graine tombe dans le camp adverse</li>
+            <li>La case finale contient exactement <strong>2, 3 ou 4</strong> graines</li>
+            <li>La case finale n'est pas la première case adverse protégée (seule)</li>
+            <li>La prise ne vide pas entièrement le camp adverse</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="regle-bloc">
+        <div class="regle-num">05</div>
+        <div class="regle-content">
+          <h3 class="regle-h">Prise à la chaîne</h3>
+          <p class="regle-p">Après une prise, on remonte vers la première case adverse. Chaque case consécutive contenant <strong>2, 3 ou 4</strong> graines est aussi capturée. La chaîne s'arrête dès qu'une case ne remplit pas cette condition.</p>
+        </div>
+      </div>
+
+      <div class="regle-bloc">
+        <div class="regle-num">06</div>
+        <div class="regle-content">
+          <h3 class="regle-h">Grenier</h3>
+          <p class="regle-p">Une case avec <strong>plus de 13 graines</strong> est un grenier. La semaille fait un tour complet sans remettre dans la case source, puis distribue le reste uniquement dans le camp adverse.</p>
+        </div>
+      </div>
+
+      <div class="regle-bloc">
+        <div class="regle-num">07</div>
+        <div class="regle-content">
+          <h3 class="regle-h">Solidarité</h3>
+          <p class="regle-p">Si le camp adverse est vide, le joueur actif <strong>doit le nourrir</strong>. Il doit donner au moins 7 graines si possible, sinon le maximum possible. Si impossible, la partie se termine.</p>
+        </div>
+      </div>
+
+      <div class="regle-bloc">
+        <div class="regle-num">08</div>
+        <div class="regle-content">
+          <h3 class="regle-h">Fin de partie</h3>
+          <p class="regle-p">La partie se termine si un joueur atteint 40 graines, s'il reste moins de 10 graines sur le tablier, ou si un joueur ne peut plus nourrir l'adversaire. Les graines restantes sont ajoutées au score du propriétaire du camp.</p>
+        </div>
+      </div>
+
+      <button class="btn-jouer" onclick="retourAccueilDepuisRegles()" style="margin-top:8px">Retour à l'accueil</button>
+    </div>
+
+    <footer class="footer">
+      <p class="footer-name">Développé par <strong>Evina Zanga Alan Dimitri</strong></p>
+      <p class="footer-info">AfriTech Innovation &nbsp;·&nbsp; Licence 2 Informatique &nbsp;·&nbsp; 24G2003</p>
+    </footer>
+  </div>
+
+  <!-- ========== PAGE JEU ========== -->
+  <div id="page-jeu" class="hidden">
+    <div class="game-wrap">
+      <div class="game-header">
+        <button class="btn-back" onclick="retourAccueil()">← Accueil</button>
+        <div class="game-title">Songho</div>
+        <div style="width:80px"></div>
+      </div>
+
+      <div class="board">
+        <div class="player-row">
+          <span class="player-label" id="label-nord">Nord</span>
+          <div class="cells" id="cells-nord"></div>
+        </div>
+        <div class="divider"></div>
+        <div class="player-row">
+          <span class="player-label" id="label-sud">Sud</span>
+          <div class="cells" id="cells-sud"></div>
+        </div>
+      </div>
+
+      <div class="scores">
+        <div class="score-block">
+          <div class="score-label" id="score-label-nord">Nord</div>
+          <div class="score-val" id="score-nord">0</div>
+          <div class="score-target">/ 40</div>
+        </div>
+        <div class="turn-indicator" id="turn-msg">Tour de Sud</div>
+        <div class="score-block">
+          <div class="score-label" id="score-label-sud">Sud</div>
+          <div class="score-val" id="score-sud">0</div>
+          <div class="score-target">/ 40</div>
+        </div>
+      </div>
+
+      <div class="message-bar" id="msg-bar">Choisissez une case pour commencer</div>
+      <button class="btn-restart" onclick="initGame()">Nouvelle partie</button>
+    </div>
+
+    <footer class="footer">
+      <p class="footer-name">Développé par <strong>Evina Zanga Alan Dimitri</strong></p>
+      <p class="footer-info">AfriTech Innovation &nbsp;·&nbsp; Licence 2 Informatique &nbsp;·&nbsp; 24G2003</p>
+    </footer>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const count = 20;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = 3 + Math.random() * 5;
+      p.style.left        = (Math.random() * 100) + 'vw';
+      p.style.width       = size + 'px';
+      p.style.height      = size + 'px';
+      p.style.animationDuration  = (10 + Math.random() * 15) + 's';
+      p.style.animationDelay     = (Math.random() * 12) + 's';
+      const gold = Math.random() > 0.5;
+      p.style.background  = gold
+        ? 'rgba(196, 145, 74, 0.35)'
+        : 'rgba(245, 217, 160, 0.2)';
+      document.body.appendChild(p);
+    }
+  });
+</script>
+
+  <script src="game.js"></script>
+</body>
+</html>
